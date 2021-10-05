@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.5.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,12 +9,24 @@
     <title>Alarm</title>
 </head>
 <body>
+    <div class = "increase-buttons">
+    <button class = "increase-hours"><i id = "up" class="fas fa-sort-up"></i></button>
+    <button class = "increase-minutes"><i id = "up" class="fas fa-sort-up"></i></button>
+    <button class = "increase-seconds"><i id = "up" class="fas fa-sort-up"></i></button>
+</div>
    <div class = "alarm-time-set">
-        <input type="number" class = "slot-hours" min="1" max="12"></input><br>
-        <input type="number" class = "slot-minutes" min="1" max="59"></input><br>
-        <input type="number" class = "slot-seconds" min="1" max="59"></input><br>
+        <input readonly type="number" class = "slot-hours">
+        <input readonly type="number" class = "slot-minutes">
+        <input readonly type="number" class = "slot-seconds">
    </div>
+   <div class = "decrease-buttons">
+   <button class = "decrease-hours"><i id = "down" class="fas fa-sort-down"></i></button>
+   <button class = "decrease-hours"><i id = "down"  class="fas fa-sort-down"></i></button>
+   <button class = "decrease-hours"><i id = "down"  class="fas fa-sort-down"></i></button>
+</div>
+</div>
    <button class ="button-create">CREATE</button>
+   <div class="alarms"></div>
 </body>
 <script src="script.js"></script>
 </html>
