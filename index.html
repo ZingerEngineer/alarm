@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Birthstone&display=swap" rel="stylesheet"> 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.5.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <meta charset="UTF-8">
@@ -9,24 +12,37 @@
     <title>Alarm</title>
 </head>
 <body>
-    <div class = "increase-buttons">
-    <button class = "increase-hours"><i id = "up" class="fas fa-sort-up"></i></button>
-    <button class = "increase-minutes"><i id = "up" class="fas fa-sort-up"></i></button>
-    <button class = "increase-seconds"><i id = "up" class="fas fa-sort-up"></i></button>
-</div>
+
    <div class = "alarm-time-set">
-        <input readonly type="number" class = "slot-hours">
-        <input readonly type="number" class = "slot-minutes">
-        <input readonly type="number" class = "slot-seconds">
+    <div class = "slot">
+    <button id ="up-hour" class = "control-value"><i id = "up" class="fas fa-sort-up"></i></button>
+    <select readonly type="number" class = "slot-hours"></select>
+    <button id ="down-hour" class = "control-value"><i id = "down" class="fas fa-sort-down"></i></button>
+    </div>
+    <div class= "slot">
+        <button id ="up-minute" class = "control-value"><i id = "up" class="fas fa-sort-up"></i></button>
+        <select readonly type="number" class = "slot-minutes"></select>
+        <button id ="down-minute" class = "control-value"><i id = "down"  class="fas fa-sort-down"></i></button>
+    </div>
+    <div class="slot">
+        <button class = "control-value"><i id = "up" class="fas fa-sort-up"></i></button>
+        <select readonly type="string" class = "slot-day-time">
+            <option value="AM">AM</option>
+            <option value="PM">PM</option>
+        </select>
+        <button class = "control-value"><i id = "down"  class="fas fa-sort-down"></i></button>
+    </div>
    </div>
-   <div class = "decrease-buttons">
-   <button class = "decrease-hours"><i id = "down" class="fas fa-sort-down"></i></button>
-   <button class = "decrease-hours"><i id = "down"  class="fas fa-sort-down"></i></button>
-   <button class = "decrease-hours"><i id = "down"  class="fas fa-sort-down"></i></button>
-</div>
-</div>
    <button class ="button-create">CREATE</button>
-   <div class="alarms"></div>
+   <div class="alarms">
+       <div class="alarm-card">
+           <div class="card-buttons">
+           <button class="button-delete"><i class="fas fa-times-circle"></i></button>
+           <button class="turn-on-of"><i class="fas fa-check-circle"></i></button>
+        </div>
+        <div class="clock-set">00:00</div>
+       </div>
+   </div>
 </body>
 <script src="script.js"></script>
 </html>

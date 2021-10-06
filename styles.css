@@ -13,17 +13,26 @@ body {
   flex-direction: column;
   display: flex;
   align-items: center;
+  font-family: "Rubik", sans-serif;
 }
 .alarm-time-set {
   margin-left: auto;
   margin-right: auto;
-  width: 350px;
+  width: 270px;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  height: 110px;
+  height: 230px;
+  
 }
-input {
+.slot {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+}
+select {
   width: 100px;
   height: 100px;
   background-color: rgba(0, 0, 0, 0.5);
@@ -32,23 +41,25 @@ input {
   text-align: center;
   font-size: 20px;
   color: #fff;
-  cursor: default;
+  cursor: pointer;
+  
+  
+}
+select.slot-day-time {
+  width: 50px;
+  height: 50px;
 }
 textarea:focus,
-input:focus {
+select:focus {
   outline: none;
 }
-/* Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
+
+select::-webkit-outer-spin-button,
+select::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-/* Firefox */
-input[type="number"] {
-  -moz-appearance: textfield;
-}
 .button-create {
   background-color: rgba(0, 0, 0);
   border: none;
@@ -58,9 +69,9 @@ input[type="number"] {
   font-size: 16px;
   height: 50px;
   width: 100px;
-  margin-top: 10px;
+  cursor: pointer;
 }
-button {
+.control-value {
   width: 40px;
   height: 40px;
   background-color: rgba(0, 0, 0);
@@ -71,17 +82,9 @@ button {
   color: #fff;
   padding: 0px;
   cursor: pointer;
+  margin: 4px;
 }
-.decrease-buttons {
-  width: 340px;
-  display: flex;
-  justify-content: space-around;
-}
-.increase-buttons {
-  width: 340px;
-  display: flex;
-  justify-content: space-around;
-}
+
 i#down {
   padding-bottom: 9px;
 }
@@ -92,5 +95,57 @@ i#up {
   width: 500px;
   height: 400px;
   background-color: rgba(0, 0, 0, 0.5);
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+}
+.alarm-card{
+  width: 400px;
+  height: 150px;
+  background-color: rgba(255, 255, 255, 0.705);
   margin-top: 10px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.card-buttons{
+  width: 125px;
+    display: flex;
+    justify-content: space-around;
+}
+.turn-on-of{
+  display: flex;
+  background-color: rgba(1,1,1,0);
+  border: none;
+  border-radius: 100%;
+  color: rgb(39, 39, 39);
+  text-align: center;
+  font-size: 45px;
+  height: 40px;
+  width: 40px;
+  padding: 0px;
+  cursor: pointer;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.button-delete{
+  display: flex;
+  background-color: rgba(1,1,1,0);
+  border: none;
+  border-radius: 100%;
+  color: rgb(39, 39, 39);
+  text-align: center;
+  font-size: 45px;
+  height: 40px;
+  width: 40px;
+  padding: 0px;
+  cursor: pointer;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.clock-set{
+  font-size:50px;
 }
