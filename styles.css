@@ -97,11 +97,14 @@ i#up {
   background-color: rgba(0, 0, 0, 0.5);
   margin-top: 15px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  overflow-y: scroll;
+  align-items: center;
 }
 .alarm-card{
   width: 400px;
-  height: 150px;
+  height: 60px;
   background-color: rgba(255, 255, 255, 0.705);
   margin-top: 10px;
   border-radius: 5px;
