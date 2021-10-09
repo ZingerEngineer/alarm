@@ -149,6 +149,22 @@ i#up {
   justify-content: center;
   align-items: center;
 }
+.turn-on-of{
+  display: flex;
+  background-color: rgba(1, 1, 1, 0);
+  border: none;
+  border-radius: 100%;
+  color: rgb(39, 39, 39);
+  text-align: center;
+  font-size: 45px;
+  height: 40px;
+  width: 40px;
+  padding: 0px;
+  cursor: pointer;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
 .clock-set{
   font-size:50px;
 }
