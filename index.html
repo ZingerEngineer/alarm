@@ -1,41 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Birthstone&display=swap" rel="stylesheet"> 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.5.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Birthstone&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.5.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Alarm</title>
-</head>
-<body>
-
-   <div class = "alarm-time-set">
-    <div class = "slot">
-    <button id ="up-hour" class = "control-value"><i id = "up" class="fas fa-sort-up"></i></button>
-    <select readonly type="number" class = "slot-hours"></select>
-    <button id ="down-hour" class = "control-value"><i id = "down" class="fas fa-sort-down"></i></button>
-    </div>
-    <div class= "slot">
-        <button id ="up-minute" class = "control-value"><i id = "up" class="fas fa-sort-up"></i></button>
-        <select readonly type="number" class = "slot-minutes"></select>
-        <button id ="down-minute" class = "control-value"><i id = "down"  class="fas fa-sort-down"></i></button>
-    </div>
-    <div class="slot">
-        <button class = "control-value"><i id = "up" class="fas fa-sort-up"></i></button>
-        <select readonly type="string" class = "slot-day-time">
-            <option value="AM">AM</option>
-            <option value="PM">PM</option>
+  </head>
+  <body>
+    <div class="alarm-time-set">
+        <div class="slot">
+            <input value="2021-10-10" id="date-picker" />
+          </div>
+      <div class="slot">
+        <button id="up-hour" class="control-value">
+          <i id="up" class="fas fa-sort-up"></i>
+        </button>
+        <select readonly type="number" class="slot-hours"></select>
+        <button id="down-hour" class="control-value">
+          <i id="down" class="fas fa-sort-down"></i>
+        </button>
+      </div>
+      <div class="slot">
+        <button id="up-minute" class="control-value">
+          <i id="up" class="fas fa-sort-up"></i>
+        </button>
+        <select readonly type="number" class="slot-minutes"></select>
+        <button id="down-minute" class="control-value">
+          <i id="down" class="fas fa-sort-down"></i>
+        </button>
+      </div>
+      <div class="slot">
+        <button class="control-value">
+          <i id="up" class="fas fa-sort-up"></i>
+        </button>
+        <select readonly type="string" class="slot-day-time">
+          <option value="AM">AM</option>
+          <option value="PM">PM</option>
         </select>
-        <button class = "control-value"><i id = "down"  class="fas fa-sort-down"></i></button>
+        <button class="control-value">
+          <i id="down" class="fas fa-sort-down"></i>
+        </button>
+      </div>
     </div>
-   </div>
-   <button class ="button-create">CREATE</button>
-   <div class="alarms">
-   </div>
-</body>
-<script src="script.js"></script>
+    <button class="button-create">CREATE</button>
+    <div class="alarms"></div>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="script.js"></script>
 </html>

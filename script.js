@@ -1,10 +1,14 @@
+flatpickr("#date-picker", {
+	dateFormat: "Y-m-d",
+});
+
 let hours = document.querySelector(".slot-hours");
 let minutes = document.querySelector(".slot-minutes");
 let timeOfDay = document.querySelector(".slot-day-time");
 let alarmsBlock = document.querySelector(".alarms");
 let alarms = document.querySelector(".alarms");
 let alarmsArray = JSON.parse(localStorage.getItem("alarmsArray")) || [];
-alarmsRender(alarmsArray)
+alarmsRender(alarmsArray);
 const buttonCreate = document.querySelector(".button-create");
 const clockifyNumber = (number) => {
   if (number < 10) {
@@ -34,6 +38,8 @@ for (let i = 0; i < 60; i++) {
   minutes.appendChild(option);
 } //minute select box fill in.
 
+function timeFormat() {}
+
 function makeid() {
   var result = "";
   var characters =
@@ -58,6 +64,7 @@ function alarmsRender(alarmsArray) {
     alarmCard.className = "alarm-card";
     cardButtons.className = "card-buttons";
     buttonDelete.className = "button-delete";
+    buttonTurnOnOf.value = "not-checked";
     buttonTurnOnOf.className = "turn-on-of";
     iconCross.className = "fas fa-times-circle";
     iconCheck.className = "fas fa-check-circle";
@@ -70,18 +77,27 @@ function alarmsRender(alarmsArray) {
     alarmCard.appendChild(cardButtons);
     alarmCard.appendChild(clockSet);
     alarms.appendChild(alarmCard);
+
+    if (alarm.isActive === true) {
+      buttonTurnOnOf.style.color = "rgb(162, 0, 255)";
+    } else {
+      buttonTurnOnOf.style.removeProperty("color");
+    }
+
     buttonDelete.addEventListener("click", () => {
       const foundIndex = alarmsArray.findIndex((item) => item.id === alarm.id);
       alarmsArray.splice(foundIndex, 1);
       alarmsRender(alarmsArray);
     });
+
     buttonTurnOnOf.addEventListener("click", () => {
-      buttonTurnOnOf.style.color = "rgb(162, 0, 255)";
+      const foundIndex = alarmsArray.findIndex((item) => item.id === alarm.id);
+      alarmsArray[foundIndex].isActive = !alarmsArray[foundIndex].isActive;
+      alarmsRender(alarmsArray);
     });
   }
 
-  localStorage.setItem("alarmsArray", JSON.stringify(alarmsArray))
-  console.log(alarmsArray);
+  localStorage.setItem("alarmsArray", JSON.stringify(alarmsArray));
 }
 
 function createAlarmCard() {
@@ -95,6 +111,7 @@ function createAlarmCard() {
     minutes: clockifyNumber(alarmMinutesValue),
     dayTimeValue: alarmDayTimeValue,
     id: makeid(),
+    isActive: true,
   };
 
   const isExist = alarmsArray.find(
