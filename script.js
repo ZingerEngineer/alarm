@@ -1,7 +1,24 @@
 flatpickr("#date-picker", {
-	dateFormat: "Y-m-d",
+  dateFormat: "Y-m-d",
 });
 
+const clockifyNumber = (number) => {
+  if (number < 10) {
+    return "0" + number;
+  } else {
+    return String(number);
+  }
+};
+
+const audio = new Audio("audio/buzzer.wav");
+let currentDate = new Date();
+let year = clockifyNumber(currentDate.getFullYear());
+let month = clockifyNumber(currentDate.getMonth() + 1);
+let day = clockifyNumber(currentDate.getDate());
+let currentDateHour = clockifyNumber(formatConversion(currentDate.getHours()));
+let currentDateMinutes = clockifyNumber(currentDate.getMinutes());
+
+let date = document.querySelector("#date-picker");
 let hours = document.querySelector(".slot-hours");
 let minutes = document.querySelector(".slot-minutes");
 let timeOfDay = document.querySelector(".slot-day-time");
@@ -10,15 +27,39 @@ let alarms = document.querySelector(".alarms");
 let alarmsArray = JSON.parse(localStorage.getItem("alarmsArray")) || [];
 alarmsRender(alarmsArray);
 const buttonCreate = document.querySelector(".button-create");
-const clockifyNumber = (number) => {
-  if (number < 10) {
-    return "0" + number;
-  } else {
-    return number;
-  }
-};
 const hoursArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 const minutesArray = [];
+
+function createAlarmCard() {
+  //select box get value.
+  let alarmHourValue = hours.value;
+  let alarmMinutesValue = minutes.value;
+  let alarmDayTimeValue = timeOfDay.value;
+  //clockify value numbers.
+  const newAlarm = {
+    hours: clockifyNumber(alarmHourValue),
+    minutes: clockifyNumber(alarmMinutesValue),
+    dayTimeValue: alarmDayTimeValue,
+    date: date.value,
+    id: makeid(),
+    isActive: true,
+  };
+
+  const isExist = alarmsArray.find(
+    (item) =>
+      item.hours === newAlarm.hours &&
+      item.minutes === newAlarm.minutes &&
+      item.dayTimeValue === newAlarm.dayTimeValue &&
+      item.date === newAlarm.date
+  );
+
+  if (!isExist) {
+    alarmsArray.unshift(newAlarm);
+  }
+
+  alarmsRender(alarmsArray);
+}
+
 for (let i = 1; i < 60; i++) {
   minutesArray.push(i);
 }
@@ -38,7 +79,16 @@ for (let i = 0; i < 60; i++) {
   minutes.appendChild(option);
 } //minute select box fill in.
 
-function timeFormat() {}
+function formatConversion(hours, dayTimeValue) {
+  const usedHours = Number(hours)
+  if (dayTimeValue == "PM" && usedHours < 12) {
+    return usedHours + 12;
+  }
+
+  if (dayTimeValue == "AM" && usedHours == 12) {
+    return usedHours - 12;
+  }
+}
 
 function makeid() {
   var result = "";
@@ -61,6 +111,8 @@ function alarmsRender(alarmsArray) {
     let iconCross = document.createElement("I");
     let iconCheck = document.createElement("I");
     let clockSet = document.createElement("DIV");
+    let alarmNumbers = document.createElement("DIV");
+    let dateDiv = document.createElement("DIV");
     alarmCard.className = "alarm-card";
     cardButtons.className = "card-buttons";
     buttonDelete.className = "button-delete";
@@ -69,7 +121,11 @@ function alarmsRender(alarmsArray) {
     iconCross.className = "fas fa-times-circle";
     iconCheck.className = "fas fa-check-circle";
     clockSet.className = "clock-set";
-    clockSet.innerHTML = alarm.hours + ":" + alarm.minutes + alarm.dayTimeValue;
+    alarmNumbers.className = "alarm-numbers";
+    dateDiv.className = "date";
+    clockSet.innerHTML =
+      alarm.hours + ":" + alarm.minutes + "&nbsp" + alarm.dayTimeValue;
+    dateDiv.innerHTML = alarm.date;
     buttonDelete.appendChild(iconCross);
     buttonTurnOnOf.appendChild(iconCheck);
     cardButtons.appendChild(buttonDelete);
@@ -77,6 +133,8 @@ function alarmsRender(alarmsArray) {
     alarmCard.appendChild(cardButtons);
     alarmCard.appendChild(clockSet);
     alarms.appendChild(alarmCard);
+    clockSet.appendChild(alarmNumbers);
+    clockSet.appendChild(dateDiv);
 
     if (alarm.isActive === true) {
       buttonTurnOnOf.style.color = "rgb(162, 0, 255)";
@@ -94,38 +152,48 @@ function alarmsRender(alarmsArray) {
       const foundIndex = alarmsArray.findIndex((item) => item.id === alarm.id);
       alarmsArray[foundIndex].isActive = !alarmsArray[foundIndex].isActive;
       alarmsRender(alarmsArray);
+      alarmAudio();
     });
   }
 
   localStorage.setItem("alarmsArray", JSON.stringify(alarmsArray));
 }
 
-function createAlarmCard() {
-  //select box get value.
-  let alarmHourValue = hours.value;
-  let alarmMinutesValue = minutes.value;
-  let alarmDayTimeValue = timeOfDay.value;
-  //clockify value numbers.
-  const newAlarm = {
-    hours: clockifyNumber(alarmHourValue),
-    minutes: clockifyNumber(alarmMinutesValue),
-    dayTimeValue: alarmDayTimeValue,
-    id: makeid(),
-    isActive: true,
-  };
+buttonCreate.addEventListener("click", createAlarmCard);
 
-  const isExist = alarmsArray.find(
-    (item) =>
-      item.hours === newAlarm.hours &&
-      item.minutes === newAlarm.minutes &&
-      item.dayTimeValue === newAlarm.dayTimeValue
+function findAlarm() {
+
+  return alarmsArray.find(
+    (item) => {
+      console.log({
+        item,
+        expectedHours: clockifyNumber(formatConversion(item.hours, item.dayTimeValue)),
+        currentDateHour,
+        expectedDate: year + "-" + month + "-" + day,
+        currentDateMinutes
+      })
+      return item.isActive === true &&
+      item.date === year + "-" + month + "-" + day &&
+      clockifyNumber(formatConversion(item.hours, item.dayTimeValue)) == currentDateHour &&
+      item.minutes === currentDateMinutes
+    }
+      
   );
-
-  if (!isExist) {
-    alarmsArray.unshift(newAlarm);
-  }
-
-  alarmsRender(alarmsArray);
 }
 
-buttonCreate.addEventListener("click", createAlarmCard);
+function alarmAudio(alarm) {
+  if (alarm) {
+    audio.play();
+  }
+}
+
+setInterval(() => {
+  currentDate = new Date();
+  year = clockifyNumber(currentDate.getFullYear());
+  month = clockifyNumber(currentDate.getMonth() + 1);
+  day = clockifyNumber(currentDate.getDate());
+  currentDateHour = clockifyNumber(currentDate.getHours());
+  currentDateMinutes = clockifyNumber(currentDate.getMinutes());
+  const alarm = findAlarm();
+  alarmAudio(alarm);
+}, 10000);
