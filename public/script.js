@@ -10,7 +10,7 @@ const clockifyNumber = (number) => {
   }
 };
 
-const audio = new Audio("audio/buzzer.wav");
+const audio = new Audio("https://firebasestorage.googleapis.com/v0/b/alarm-timify.appspot.com/o/buzzer.wav?alt=media&token=cffedfad-6f55-4ef0-96c0-0f2ba885dffb");
 let currentDate = new Date();
 let year = clockifyNumber(currentDate.getFullYear());
 let month = clockifyNumber(currentDate.getMonth() + 1);

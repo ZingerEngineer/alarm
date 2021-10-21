@@ -7,7 +7,7 @@ body {
   width: 100%;
   height: 100%;
   margin: 0px;
-  background-image: url("imges/BG.jpg");
+  background-image: url("https://firebasestorage.googleapis.com/v0/b/alarm-timify.appspot.com/o/BG.jpg?alt=media&token=369719a3-97c9-466f-a827-a115ad0e7161");
   background-size: cover;
   color: #fff;
   flex-direction: column;
